@@ -44,7 +44,7 @@ if (isset($hash) && $hash!="") {
 		$valueout=$row['valueout'];
 		$total_coins=$row['total_coins'];
 		$mint=$row['mint'];
-		$fee=$row['fee'];
+		$fee=bcsub(bcsub($valueout,$mint,8),$valuein,8);
 		$size=$row['size'];
 		$total_avgcoindays=$row['total_avgcoindays'];
 		$coindaysdestroyed=$row['coindaysdestroyed'];
@@ -52,11 +52,11 @@ if (isset($hash) && $hash!="") {
 		if (strpos($flag,'proof-of-work') !== false) {
 			$flag="PoW";
 			$flagcolor="danger";
-			$feeWOmint=$fee;
+			$feeWOmint=bcmul($fee,-1,8);
 		} else {
 			$flag="PoS";
 			$flagcolor="success";
-			$feeWOmint=bcadd($fee,$mint,8);
+			$feeWOmint=bcmul($fee,-1,8);
 		}
 	}
 	if (isset($height)) {
