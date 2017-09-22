@@ -170,6 +170,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			} else {
 				$fee=$valuein-$valueout;
 			}
+			$fee=round($fee,6);
 			$query="UPDATE transactions
 			SET numvin = '$countvin',
 			numvout = '$countvout',
@@ -183,7 +184,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$result = $dbconn->query($query);
 			$valueintotal=$valueintotal+$valuein;
 			$valueouttotal=$valueouttotal+$valueout;
-			$feetotal=$feetotal+$fee;
+			$feetotal=round($feetotal+$fee,6);
 			$coindaysdestroyedtotal=bcadd($coindaysdestroyedtotal,$coindaysdestroyed,9);
 			$counttx++;
 		}
@@ -296,6 +297,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			} else {
 				$fee=$valuein-$valueout;
 			}
+			$fee=round($fee,6);
 			$query="UPDATE transactions
 			SET numvin = '$countvin',
 			numvout = '$countvout',
@@ -309,7 +311,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$result = $dbconn->query($query);
 			$valueintotal=$valueintotal+$valuein;
 			$valueouttotal=$valueouttotal+$valueout;
-			$feetotal=$feetotal+$fee;
+			$feetotal=round($feetotal+$fee,6);
 			$coindaysdestroyedtotal=bcadd($coindaysdestroyedtotal,$coindaysdestroyed,9);
 			$counttx++;
 		}

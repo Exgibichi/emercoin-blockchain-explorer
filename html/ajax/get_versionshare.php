@@ -45,15 +45,19 @@ if (!empty($_COOKIE["lang"])) {
 		$count=bcmul(bcdiv($row['count'],1000,4),100,2);
 		$version=$row['version'];
 		if ($version == 43646981) {
-			$version="5 (client v.0.6.0/1/2)";
+			$version="0.6.2";
 			$barcount+=$count;
 		}
 		if ($version == 43647237) {
-			$version="5 (Merged Mining)";
+			$version="0.6.2 (Merged Mining)";
 			$barcount+=$count;
 		}
 		if ($version == 43646982) {
-			$version="5 (client v.0.6.3)";
+			$version="0.6.3";
+			$barcount+=$count;
+		}
+		if ($version == 43647238) {
+			$version="0.6.3 (Merged Mining)";
 			$barcount+=$count;
 		}
 		echo '<tr><td>'.$version.'</td><td>'.$count.' %</td></tr>';

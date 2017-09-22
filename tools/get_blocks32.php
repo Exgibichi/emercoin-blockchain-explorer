@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-ini_set("display_errors", 1); 
+ini_set("display_errors", 1);
 
 require_once __DIR__ . '/include32.php';
 function getblockinfo($dbconn, $emercoin, $hash) {
@@ -27,7 +27,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		$query="SELECT time, mint, total_coins, total_coindays FROM blocks WHERE hash = '$previousblockhash'";
 		$result = $dbconn->query($query);
 		while($row = $result->fetch_assoc())
-		{	
+		{
 			$oldtime=$row['time'];
 			$total_coins=$row['total_coins'];
 			$total_coins_old=$row['total_coins'];
@@ -55,7 +55,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		}
 	if ($hash_in_db == "" && $current_status!="0") {
 		$current_status="0";
-		$query="INSERT INTO blocks 
+		$query="INSERT INTO blocks
 		(hash, size, height, version, merkleroot, time, nonce, bits, difficulty, mint, previousblockhash, flags, proofhash, entropybit, modifier, modifierchecksum, status)
 		VALUES
 		('$hash', '$size', '$height', '$version', '$merkleroot', '$time', '$nonce', '$bits', '$difficulty', '$mint', '$previousblockhash', '$flags', '$proofhash', '$entropybit', '$modifier', '$modifierchecksum', '$current_status')";
@@ -86,8 +86,8 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		WHERE hash = '$hash_in_db'";
 		$result = $dbconn->query($query);
 		$update_ID="updated";
-	}	
-	
+	}
+
 	if ($new_ID!="") {
 		$valueintotal=0;
 		$valueouttotal=0;
@@ -111,7 +111,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			('$new_ID', '$txid' )";
 			$result = $dbconn->query($query);
 			$tx_ID=$dbconn -> insert_id;
-			$vin=gettxinput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $sentaddress);	
+			$vin=gettxinput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $sentaddress);
 			foreach ($vin['sentaddressarray'] as $address => $value) {
 				if ($addressquery=="") {
 					$addressquery="address='".$address."'";
@@ -124,7 +124,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 				} else {
 					$addresses[$address]['value']=bcsub($addresses[$address]['value'],$value['sent'],8);
 					$addresses[$address]['senttime']=$value['time'];
-				}	
+				}
 				if (!isset($addresses[$address]['sentvalue'])) {
 					$addresses[$address]['sentvalue']=$value['sent'];
 					$addresses[$address]['sentcount']=1;
@@ -133,7 +133,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 					$addresses[$address]['sentcount']++;
 				}
 				$senttransactionaddress[$txid][$address]="1";
-			}	
+			}
 			$valuein=$vin["valuein"];
 			$countvin=$vin["countvin"];
 			$countvintotal=$countvintotal+$countvin;
@@ -153,7 +153,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 				} else {
 					$addresses[$address]['value']=bcadd($addresses[$address]['value'],$value['received'],8);
 					$addresses[$address]['receivetime']=$value['time'];
-				}	
+				}
 				if (!isset($addresses[$address]['receivedvalue'])) {
 					$addresses[$address]['receivedvalue']=$value['received'];
 					$addresses[$address]['receivedcount']=1;
@@ -161,7 +161,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 					$addresses[$address]['receivedvalue']=bcadd($addresses[$address]['receivedvalue'],$value['received'],8);
 					$addresses[$address]['receivedcount']++;
 				}
-			}	
+			}
 			$valueout=$vout["valueout"];
 			$countvout=$vout["countvout"];
 			$countvouttotal=$countvouttotal+$countvout;
@@ -170,6 +170,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			} else {
 				$fee=$valuein-$valueout;
 			}
+			$fee=round($fee,6);
 			$query="UPDATE transactions
 			SET numvin = '$countvin',
 			numvout = '$countvout',
@@ -183,7 +184,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$result = $dbconn->query($query);
 			$valueintotal=$valueintotal+$valuein;
 			$valueouttotal=$valueouttotal+$valueout;
-			$feetotal=$feetotal+$fee;
+			$feetotal=round($feetotal+$fee,6);
 			$coindaysdestroyedtotal=bcadd($coindaysdestroyedtotal,$coindaysdestroyed,9);
 			$counttx++;
 		}
@@ -205,7 +206,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$total_avgcoindays=0;
 		}
 	}
-	
+
 	if ($update_ID!="") {
 		$query="DELETE FROM transactions WHERE blockid = '$current_id'";
 		$result = $dbconn->query($query);
@@ -237,7 +238,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			('$current_id', '$txid' )";
 			$result = $dbconn->query($query);
 			$tx_ID=$dbconn -> insert_id;
-			$vin=gettxinput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $sentaddress);	
+			$vin=gettxinput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $sentaddress);
 			foreach ($vin['sentaddressarray'] as $address => $value) {
 				if ($addressquery=="") {
 					$addressquery="address='".$address."'";
@@ -250,16 +251,16 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 				} else {
 					$addresses[$address]['value']=bcsub($addresses[$address]['value'],$value['sent'],8);
 					$addresses[$address]['senttime']=$value['time'];
-				}	
+				}
 				if (!isset($addresses[$address]['sentvalue'])) {
 					$addresses[$address]['sentvalue']=$value['sent'];
 					$addresses[$address]['sentcount']=1;
 				} else {
 					$addresses[$address]['sentvalue']=bcadd($addresses[$address]['sentvalue'],$value['sent'],8);
 					$addresses[$address]['sentcount']++;
-				}	
+				}
 				$senttransactionaddress[$txid][$address]="1";
-			}	
+			}
 			$valuein=$vin["valuein"];
 			$countvin=$vin["countvin"];
 			$countvintotal=$countvintotal+$countvin;
@@ -279,7 +280,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 				} else {
 					$addresses[$address]['value']=bcadd($addresses[$address]['value'],$value['received'],8);
 					$addresses[$address]['receivetime']=$value['time'];
-				}	
+				}
 				if (!isset($addresses[$address]['receivedvalue'])) {
 					$addresses[$address]['receivedvalue']=$value['received'];
 					$addresses[$address]['receivedcount']=1;
@@ -287,7 +288,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 					$addresses[$address]['receivedvalue']=bcadd($addresses[$address]['receivedvalue'],$value['received'],8);
 					$addresses[$address]['receivedcount']++;
 				}
-			}	
+			}
 			$valueout=$vout["valueout"];
 			$countvout=$vout["countvout"];
 			$countvouttotal=$countvouttotal+$countvout;
@@ -296,6 +297,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			} else {
 				$fee=$valuein-$valueout;
 			}
+			$fee=round($fee,6);
 			$query="UPDATE transactions
 			SET numvin = '$countvin',
 			numvout = '$countvout',
@@ -309,7 +311,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$result = $dbconn->query($query);
 			$valueintotal=$valueintotal+$valuein;
 			$valueouttotal=$valueouttotal+$valueout;
-			$feetotal=$feetotal+$fee;
+			$feetotal=round($feetotal+$fee,6);
 			$coindaysdestroyedtotal=bcadd($coindaysdestroyedtotal,$coindaysdestroyed,9);
 			$counttx++;
 		}
@@ -330,7 +332,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		} else {
 			$total_avgcoindays=0;
 		}
-		
+
 	}
 
 	$getinfo=$emercoin->getinfo();
@@ -338,7 +340,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		$query="SELECT address FROM address WHERE status != '1'";
 		$result = $dbconn->query($query);
 		while($row = $result->fetch_assoc())
-		{	
+		{
 			$address=$row['address'];
 			$query2="SELECT COUNT(vin.value) AS sent_count, SUM(vin.value) AS sent_total, '' AS received_count, '' AS received_total
 			FROM vin
@@ -354,7 +356,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$received_total=0;
 			$received_count=0;
 			while($row2 = $result2->fetch_assoc())
-			{	
+			{
 				if ($row2['sent_total']!="") {
 					$sent_total=round($row2['sent_total'],8);
 					$sent_count=$row2['sent_count'];
@@ -375,9 +377,9 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			WHERE address = '$address'";
 			$result3 = $dbconn->query($query3);
 		}
-		
+
 		getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddress);
-		
+
 		//get used/unused addresses
 		$query="SELECT COUNT(address) as total_addresses_used FROM `address` WHERE balance >0";
 		$result = $dbconn->query($query);
@@ -391,7 +393,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		{
 			$total_addresses_unused=$row['total_addresses_unused'];
 		}
-		
+
 		$current_status="1";
 		$query="UPDATE blocks
 		SET time = '$time',
@@ -411,20 +413,20 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		status = '$current_status'";
 		if ($new_ID!="") {
 			$query.="WHERE id = '$new_ID'";
-		}	
+		}
 		else if ($update_ID!="") {
 			$query.="WHERE id = '$current_id'";
-		}	
+		}
 		$result = $dbconn->query($query);
-		
+
 		//echo $new_ID."\n";
-		
+
 		$query="UPDATE address
 		SET status = '1'
 		WHERE status = '0'";
 		$result = $dbconn->query($query);
-		
-		
+
+
 		if (isset($getinfo['blocks'])) {
 			$currentblocks=$getinfo['blocks'];
 			//getnvsinfo($dbconn, $emercoin, $currentblocks);
@@ -438,7 +440,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		$blockdiff=bcsub($currentblocks,$height,0);
 		if ($blockdiff>32) {
 			getblockinfo($dbconn, $emercoin, $nextblockhash);
-		}	
+		}
 	}
 }
 
@@ -451,7 +453,7 @@ function getnvsinfo($dbconn, $emercoin, $height) {
 		printf("Errormessage_select: %s\n", $dbconn->error);
 	}
 	while($row = $result->fetch_assoc())
-	{	
+	{
 		$valueindb[addslashes($row['name'])]['value']=addslashes($row['value']);
 		$valueindb[addslashes($row['name'])]['type']=addslashes($row['type']);
 		$valueindb[addslashes($row['name'])]['registered_at']=$row['registered_at'];
@@ -464,7 +466,7 @@ function getnvsinfo($dbconn, $emercoin, $height) {
 		if (strpos($name, ':') !== false) {
 			$nameArr=explode(':',$name);
 			$type=addslashes($nameArr[0]);
-		}	
+		}
 		$value=addslashes($nv['value']);
 		$isbase64=0;
 		if (!ctype_print($value)) {
@@ -487,8 +489,8 @@ function getnvsinfo($dbconn, $emercoin, $height) {
 					printf("Errormessage_update: %s\n", $dbconn->error);
 				}
 			}
-		}	
-	}	
+		}
+	}
 	if ($inputs!='') {
 		$inputs=rtrim($inputs, ",");
 		$inputs.=";";
@@ -498,7 +500,7 @@ function getnvsinfo($dbconn, $emercoin, $height) {
 		//echo $query;
 		if (!$dbconn->query($query)) {
 			printf("Errormessage_insert: %s\n", $dbconn->error);
-		}	
+		}
 	}
 };
 
@@ -519,15 +521,15 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 			$addresses[$row['address']]['id']=$row['id'];
 			if (isset($addresses[$row['address']]['sentvalue'])) {
 				$addresses[$row['address']]['sentvalue']=round(bcadd($addresses[$row['address']]['sentvalue'],$row['total_sent'],8),8);
-				$addresses[$row['address']]['sentcount']=round(bcadd($addresses[$row['address']]['sentcount'],$row['count_sent'],8),8);	
+				$addresses[$row['address']]['sentcount']=round(bcadd($addresses[$row['address']]['sentcount'],$row['count_sent'],8),8);
 			}
 			if (isset($addresses[$row['address']]['receivedvalue'])) {
 				$addresses[$row['address']]['receivedvalue']=round(bcadd($addresses[$row['address']]['receivedvalue'],$row['total_received'],8),8);
 				$addresses[$row['address']]['receivedcount']=round(bcadd($addresses[$row['address']]['receivedcount'],$row['count_received'],8),8);
-					
-			}			
+
+			}
 		}
-		
+
 		$accountold_array=array();
 		$update_query_set=0;
 		$updatequery="UPDATE address SET account = CASE ";
@@ -543,7 +545,7 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 			foreach ($tx as $address => $dummyvalue) {
 				if ($count==0) {
 					$firstaddress=$address;
-				}	
+				}
 				if (isset($addresses[$address]['account'])) {
 					if ($addresses[$address]['account']!="") {
 						$accountisset=1;
@@ -558,16 +560,16 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 			} else {
 				ksort($accountarray);
 				foreach ($accountarray as $id => $get_account) {
-					$account=$get_account; 
+					$account=$get_account;
 					break;
-				}			
+				}
 				//echo $account." ";
 			}
 
 			foreach ($addressesintx as $address) {
 				$addresses[$address]['account']=$account;
-			}	
-				
+			}
+
 			foreach ($addressindb as $address => $accountold) {
 				if ($accountold!=$addresses[$address]['account'] && $accountold != "") {
 					$updatequery.="WHEN account = '$accountold' THEN '$account' ";
@@ -575,22 +577,22 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 					array_push($accountold_array,$accountold);
 				}
 			}
-						
-		}				
-		
+
+		}
+
 		$accountold_array=array_unique($accountold_array);
 		foreach ($accountold_array as $accountold) {
 			$updatequery_where.="'$accountold',";
 		}
-		
+
 		$updatequery_where=rtrim($updatequery_where,',');
 		$updatequery_where.=")";
-		
+
 		$updatequery=$updatequery.$updatequery_where;
 		if ($update_query_set==1) {
 			$result = $dbconn->query($updatequery);
-		}	
-		
+		}
+
 	}
 
 	$inputs="";
@@ -616,7 +618,7 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 			$account=$value['account'];
 		} else {
 			$account=$address;
-		}	
+		}
 		if(isset($value['senttime'])) {
 			$senttime=$value['senttime'];
 			$sentcount=$value['sentcount'];
@@ -630,7 +632,7 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 			$receivevalue=$value['receivedvalue'];
 		} else {
 			$receivetime="";
-		}	
+		}
 		if (!array_key_exists($address,$addressindb)) {
 			$inputs.="('$address', '$balancechange', '$account', '0', '$receivetime', '0', '1', '0', '$receivevalue', '0'),";
 		} else {
@@ -640,28 +642,28 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 					$updatesenttimequery.="WHEN '$address' THEN '$senttime' ";
 					$updatecountsentquery.="WHEN '$address' THEN '$sentcount' ";
 					$updatetotalsentquery.="WHEN '$address' THEN '$sentvalue' ";
-				}	
+				}
 				if ($receivetime!="") {
 					$last_received_set="1";
 					$updatereceivetimequery.="WHEN '$address' THEN '$receivetime' ";
 					$updatecountreceivequery.="WHEN '$address' THEN '$receivecount' ";
 					$updatetotalreceivequery.="WHEN '$address' THEN '$receivevalue' ";
-				}	
+				}
 				$updatebalancequery.="WHEN '$address' THEN '$balancechange' ";
 				$updateaccountquery.="WHEN '$address' THEN '$account' ";
 				$updatestatusquery.="WHEN '$address' THEN '0' ";
 				array_push($address_unique_array,$address);
-		}	
+		}
 	}
-	
+
 	$address_unique_array=array_unique($address_unique_array);
 	foreach ($address_unique_array as $address) {
 		$updatequery_where.="'$address',";
 	}
-	
+
 	$updatequery_where=rtrim($updatequery_where,',');
 	$updatequery_where.=")";
-	
+
 	if ($update_query_set==1) {
 		$updatequery.=$updatebalancequery."ELSE balance END, ";
 		$updatequery.=$updateaccountquery."ELSE account END, ";
@@ -683,7 +685,7 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 	$query="INSERT INTO address (address, balance, account, last_sent, last_received, count_sent, count_received, total_sent, total_received, status)
 	VALUES".$inputs;
 	$result = $dbconn->query($query);
-};	
+};
 
 
 function gettxinput($dbconn, $emercoin, $txid, $txdbid, $blockid, $sentaddress) {
@@ -766,7 +768,7 @@ function gettxinput($dbconn, $emercoin, $txid, $txdbid, $blockid, $sentaddress) 
 				//echo $vin["sequence"]." ";
 				$sequence=$vin["sequence"];
 			}
-			
+
 
 			$inputs.="('$blockid', '$txdbid', '$vintxid', '$coinbase', '$vout', '$asm', '$hex', '$sequence', '$address', '$value', '$coindaysdestroyed', '$avgcoindaysdestroyed'),";
 			$values["valuein"]=$values["valuein"]+$value;

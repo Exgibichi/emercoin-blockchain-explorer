@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `blocks` (
   `numvout` int(10) unsigned DEFAULT NULL,
   `valuein` double DEFAULT NULL,
   `valueout` double DEFAULT NULL,
-  `fee` float DEFAULT NULL,
+  `fee` double DEFAULT NULL,
   `total_coins` double DEFAULT NULL,
   `coindaysdestroyed` double DEFAULT NULL,
   `avgcoindaysdestroyed` double DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `numvout` int(10) unsigned DEFAULT NULL,
   `valuein` double DEFAULT NULL,
   `valueout` double DEFAULT NULL,
-  `fee` float DEFAULT NULL,
+  `fee` double DEFAULT NULL,
   `coindaysdestroyed` double DEFAULT NULL,
   `avgcoindaysdestroyed` double DEFAULT NULL,
   PRIMARY KEY (`id`)

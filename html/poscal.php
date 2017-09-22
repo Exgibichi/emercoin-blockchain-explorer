@@ -24,12 +24,29 @@
 	  </div>
 	  <br>
 	  <div class="row">
-	    <div class="col-sm-offset-2 col-sm-2">
+	    <div class="col-sm-2">
 	    </div>
-		<div class="col-sm-6">
+		<div class="col-sm-8">
 	    	<table class="table">
-					<tr><th><?php echo lang("MINTING_CHANCE");?><small><sub><?php echo lang("WITHIN_H");?></sub></small> [%]</th><th><?php echo lang("ESTIMATED_REWARD");?> [EMC]</th><tr>
-					<tr><td id="mintChanceTD">-</td><td id="rewardTD">-</td></tr>
+						<tr><th colspan="2"><?php echo lang("MINTING_CHANCE");?></th><th><?php echo lang("ESTIMATED_REWARD");?> [EMC]</th><tr>
+						<tr><td width="10%">10m</td><td width="60%">
+							<div class="progress">
+  							<div id="mintChance10mTD" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    						-
+  						</div>
+							</div></td><td rowspan="4" id="rewardTD">-</td></tr>
+						<tr><td>1h</td><td><div class="progress">
+							<div id="mintChance1hTD" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+							-
+						</div></td></tr>
+						<tr><td>24h</td><td><div class="progress">
+							<div id="mintChance24hTD" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+							-
+						</div></td></tr>
+						<tr><td>30d</td><td><div class="progress">
+							<div id="mintChance30dTD" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+							-
+						</div></td></tr>
 				</table>
 	    </div>
 	  </div>
@@ -95,7 +112,7 @@ $('#inputHashrate').on('keyup', function() {
 	jQuery.ajaxSetup({async:false});
 	$.get('https://blockchain.info/de/q/bcperblock',function(data){
 		$('#powRewardBTCTD').html(data/100000000);
-	});	
+	});
 	jQuery.ajaxSetup({async:true});
 };*/
 
@@ -103,7 +120,7 @@ function getBTCDiff() {
 	jQuery.ajaxSetup({async:false});
 	$.get('https://blockexplorer.com/api/status?q=getDifficulty',function(data){
 		$('#inputBTCPoWDiff').val(data['difficulty']);
-	});	
+	});
 	jQuery.ajaxSetup({async:true});
 };
 window.onload = getBTCDiff;
@@ -120,15 +137,31 @@ function getProb(days, coins, difficulty) {
 };
 function calculateProbBlockToday(days, coins, difficulty) {
 	var prob = getProb(days, coins, difficulty);
-    var res = 1-(Math.pow((1-prob),600));
-	res = res*144;
-	res = res*100;
-
+  var res = 1-(Math.pow((1-prob),600));
+	res10m = res;
+	res10m = res10m*100;
+	var res10m = Math.round(res10m * 10000) / 10000;
+	if (res10m > 100) {res10m=100;}
 	var reward=0;
 		if (days>30) {
 			reward=((days*coins)/365)*0.06;
 		}
-	$('#mintChanceTD').html(Math.round(res * 1000000) / 1000000);
+	$('#mintChance10mTD').css('width', res10m+'%').attr('aria-valuenow', res10m).html(res10m+'%');
+	res1 = res*6;
+	res1 = res1*100;
+	var res1 = Math.round(res1 * 10000) / 10000;
+	if (res1 > 100) {res1=100;}
+	$('#mintChance1hTD').css('width', res1+'%').attr('aria-valuenow', res1).html(res1+'%');
+	res24 = res*144;
+	res24 = res24*100;
+	var res24 = Math.round(res24 * 10000) / 10000;
+	if (res24 > 100) {res24=100;}
+	$('#mintChance24hTD').css('width', res24+'%').attr('aria-valuenow', res24).html(res24+'%');
+	res30 = res*144*30;
+	res30 = res30*100;
+	var res30 = Math.round(res30 * 10000) / 10000;
+	if (res30 > 100) {res30=100;}
+	$('#mintChance30dTD').css('width', res30+'%').attr('aria-valuenow', res30).html(res30+'%');
 	$('#rewardTD').html(Math.round(reward * 1000000) / 1000000);
 };
 function calculatePowPerDay(hashrate, difficulty, btcdiff) {
@@ -181,7 +214,7 @@ function calculatePowPerDay(hashrate, difficulty, btcdiff) {
 		$('#powTimeToFindBTCTD').html('-');
 		$('#powPerDayBTCTD').html('-');
 	}
-	
-	
+
+
 };
 </script>
