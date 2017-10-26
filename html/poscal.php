@@ -1,5 +1,5 @@
 <?php
-	$difficulty=$emercoin->getdifficulty();
+	$difficulty=$neko->getdifficulty();
 	$posDifficulty=$difficulty['proof-of-stake'];
 	$powDifficulty=$difficulty['proof-of-work'];
 	$powReward=round(bcdiv(5020,bcsqrt(bcsqrt($powDifficulty,8),8),8),2)."<br>";

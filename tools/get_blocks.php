@@ -3,8 +3,8 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 require_once __DIR__ . '/include.php';
-function getblockinfo($dbconn, $emercoin, $hash) {
-	$block=$emercoin->getblock($hash);
+function getblockinfo($dbconn, $neko, $hash) {
+	$block=$neko->getblock($hash);
 	$new_ID="";
 	$update_ID="";
 	$current_id="";
@@ -111,7 +111,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			('$new_ID', '$txid' )";
 			$result = $dbconn->query($query);
 			$tx_ID=$dbconn -> insert_id;
-			$vin=gettxinput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $sentaddress);
+			$vin=gettxinput($dbconn, $neko, $txid, $tx_ID, $new_ID, $sentaddress);
 			foreach ($vin['sentaddressarray'] as $address => $value) {
 				if ($addressquery=="") {
 					$addressquery="address='".$address."'";
@@ -140,7 +140,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$time=$vin["time"];
 			$coindaysdestroyed=$vin["coindaysdestroyed"];
 			$avgcoindaysdestroyed=$vin["avgcoindaysdestroyed"];
-			$vout=gettxoutput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $time, $receiveaddress);
+			$vout=gettxoutput($dbconn, $neko, $txid, $tx_ID, $new_ID, $time, $receiveaddress);
 			foreach ($vout['receiveaddressarray'] as $address => $value) {
 				if ($addressquery=="") {
 					$addressquery="address='".$address."'";
@@ -238,7 +238,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			('$current_id', '$txid' )";
 			$result = $dbconn->query($query);
 			$tx_ID=$dbconn -> insert_id;
-			$vin=gettxinput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $sentaddress);
+			$vin=gettxinput($dbconn, $neko, $txid, $tx_ID, $new_ID, $sentaddress);
 			foreach ($vin['sentaddressarray'] as $address => $value) {
 				if ($addressquery=="") {
 					$addressquery="address='".$address."'";
@@ -267,7 +267,7 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 			$time=$vin["time"];
 			$coindaysdestroyed=$vin["coindaysdestroyed"];
 			$avgcoindaysdestroyed=$vin["avgcoindaysdestroyed"];
-			$vout=gettxoutput($dbconn, $emercoin, $txid, $tx_ID, $new_ID, $time, $receiveaddress);
+			$vout=gettxoutput($dbconn, $neko, $txid, $tx_ID, $new_ID, $time, $receiveaddress);
 			foreach ($vout['receiveaddressarray'] as $address => $value) {
 				if ($addressquery=="") {
 					$addressquery="address='".$address."'";
@@ -426,20 +426,20 @@ function getblockinfo($dbconn, $emercoin, $hash) {
 		WHERE status = '0'";
 		$result = $dbconn->query($query);
 
-		$getinfo=$emercoin->getinfo();
+		$getinfo=$neko->getinfo();
 		if (isset($getinfo['blocks'])) {
 			$currentblocks=$getinfo['blocks'];
-			getnvsinfo($dbconn, $emercoin, $currentblocks);
+			getnvsinfo($dbconn, $neko, $currentblocks);
 		}
 	}
 
 	if (isset($block['nextblockhash'])){
 		$nextblockhash=$block['nextblockhash'];
-		getblockinfo($dbconn, $emercoin, $nextblockhash);
+		getblockinfo($dbconn, $neko, $nextblockhash);
 	}
 }
 
-function getnvsinfo($dbconn, $emercoin, $height) {
+function getnvsinfo($dbconn, $neko, $height) {
 	$inputs="";
 	$valueindb=array();
 	$query="SELECT * FROM nvs";
@@ -454,7 +454,7 @@ function getnvsinfo($dbconn, $emercoin, $height) {
 		$valueindb[addslashes($row['name'])]['registered_at']=$row['registered_at'];
 		$valueindb[addslashes($row['name'])]['expires_at']=$row['expires_at'];
 	}
-	$nvs=$emercoin->name_filter();
+	$nvs=$neko->name_filter();
 	foreach ($nvs as $nv) {
 		$name=addslashes($nv['name']);
 		$type="";
@@ -683,10 +683,10 @@ function getaddressinfo($dbconn, $addresses, $addressquery, $senttransactionaddr
 };
 
 
-function gettxinput($dbconn, $emercoin, $txid, $txdbid, $blockid, $sentaddress) {
+function gettxinput($dbconn, $neko, $txid, $txdbid, $blockid, $sentaddress) {
 	$rawtransaction="";
 	try {
-		$rawtransaction=$emercoin->getrawtransaction($txid,1);
+		$rawtransaction=$neko->getrawtransaction($txid,1);
 		$values=array();
 		$values["valuein"]=0;
 		$values["time"]=$rawtransaction["time"];
@@ -723,7 +723,7 @@ function gettxinput($dbconn, $emercoin, $txid, $txdbid, $blockid, $sentaddress) 
 			if (isset($vin["vout"])) {
 				//echo $vin["vout"]." ";
 				$vout=$vin["vout"];
-				$rawtransaction=$emercoin->getrawtransaction($vintxid,1);
+				$rawtransaction=$neko->getrawtransaction($vintxid,1);
 				$value=$rawtransaction["vout"][$vout]["value"];
 				if (isset($rawtransaction["vout"][$vout]["scriptPubKey"]["addresses"][0])) {
 					$address=$rawtransaction["vout"][$vout]["scriptPubKey"]["addresses"][0];
@@ -780,10 +780,10 @@ function gettxinput($dbconn, $emercoin, $txid, $txdbid, $blockid, $sentaddress) 
 	} catch (Exception $e) {}
 }
 
-function gettxoutput($dbconn, $emercoin, $txid, $txdbid, $blockid, $time, $receiveaddress) {
+function gettxoutput($dbconn, $neko, $txid, $txdbid, $blockid, $time, $receiveaddress) {
 	$rawtransaction="";
 	try {
-		$rawtransaction=$emercoin->getrawtransaction($txid,1);
+		$rawtransaction=$neko->getrawtransaction($txid,1);
 		$values["valueout"]=0;
 		$values["countvout"]=0;
 		$inputs="";
@@ -857,5 +857,5 @@ while($row = $result->fetch_assoc())
 {
 	$hash=$row['hash'];
 }
-getblockinfo($dbconn, $emercoin, $hash);
+getblockinfo($dbconn, $neko, $hash);
 ?>

@@ -26,7 +26,7 @@ if (!empty($_COOKIE["lang"])) {
 	}	
 	
 	require_once __DIR__ . '/../../tools/include.php';
-	$mempool=$emercoin->getrawmempool();
+	$mempool=$neko->getrawmempool();
 	
 	echo '<div class="panel-heading"><b>'.lang('UNCONFIRMED_TRANSACTIONS').'</b></div>
 	<table class="table">
@@ -36,7 +36,7 @@ if (!empty($_COOKIE["lang"])) {
 	<tbody>';
 	foreach ($mempool as $rawtx) {
 		
-			$txhash=$emercoin->getrawtransaction($rawtx,1);
+			$txhash=$neko->getrawtransaction($rawtx,1);
 			$tx_id_short = substr($txhash['txid'], 0, 4)."...".substr($txhash['txid'], -4);
 			
 		try {
@@ -80,7 +80,7 @@ if (!empty($_COOKIE["lang"])) {
 				if (isset($vin["vout"])) {
 					//echo $vin["vout"]." ";
 					$vout=$vin["vout"];
-					$tx=$emercoin->getrawtransaction($vintxid,1);
+					$tx=$neko->getrawtransaction($vintxid,1);
 					$value=$tx["vout"][$vout]["value"];
 					if (isset($tx["vout"][$vout]["scriptPubKey"]["addresses"][0])) {
 						$address=$tx["vout"][$vout]["scriptPubKey"]["addresses"][0];

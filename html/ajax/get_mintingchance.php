@@ -12,7 +12,7 @@ if (!empty($_COOKIE["lang"])) {
 
 if (isset($_GET['address'])) {
 	require_once __DIR__ . '/../../tools/include.php';
-	$difficulty=$emercoin->getdifficulty();
+	$difficulty=$neko->getdifficulty();
 	$difficulty=$difficulty['proof-of-stake'];
 	$uriaddress=$_GET['address'];
 	

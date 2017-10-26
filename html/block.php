@@ -226,7 +226,7 @@ if (isset($hash) && $hash!="") {
 			echo '<b>'.lang("NAME_NAME").':</b> '.$nvs_name.'<br>';
 			try {
 				error_reporting(0);
-				$history=$emercoin->name_history($nvs_name);
+				$history=$neko->name_history($nvs_name);
 				echo '<b>Value History:</b> <br>';
 				$days_added=0;
 				$initialtime=$history[0]['time'];
@@ -253,7 +253,7 @@ if (isset($hash) && $hash!="") {
 					$brand_param = htmlspecialchars($brand);
 					try {
 						error_reporting(0);
-						$brand_info=$emercoin->name_show('dpo:'.$brand);
+						$brand_info=$neko->name_show('dpo:'.$brand);
 						echo "<p><b>Brand info: $brand_param</b><br/>";
 						$brandtok=Tokenize($brand_info);
 						PrintTok($brandtok);
@@ -265,19 +265,19 @@ if (isset($hash) && $hash!="") {
 					$sn = preg_replace('/[^0-9A-Za-z_-]/', '', $sn);
 					echo "<p><b>Serial: $sn</b></p>";
 					$filt_key = 'dpo:'.$brand.':'.$sn.':';
-					$filt_list = $emercoin->name_filter($filt_key);
+					$filt_list = $neko->name_filter($filt_key);
 					if(empty($filt_list)) {
 					echo "Serial $sn not found in the Emercoin blockchain<br>";
 					echo "<b>Verification: <font color='red'>FAILED</font></b>";
 					} else
 					foreach($filt_list as $item) { // Yterate item list
-					  $item =  $emercoin->name_show($item['name']); // fetch full item record
+					  $item =  $neko->name_show($item['name']); // fetch full item record
 					  $tokens = Tokenize($item);
 					  PrintTok($tokens);
 					  $tokensCopy=array_change_key_case($tokens, CASE_LOWER);
 						if (isset($tokensCopy['signature'])) {
 						  try {
-							$ver = $emercoin->verifymessage($brand_info['address'], $tokensCopy['signature'], $tokens['__FOR_SIG__'])?
+							$ver = $neko->verifymessage($brand_info['address'], $tokensCopy['signature'], $tokens['__FOR_SIG__'])?
 							  "<font color='green'>PASSED</font><br><small class='text-muted'>(signature verified)</small>" : "<font color='red'>FAILED</font>";
 							echo "<b>Verification: $ver</b>";
 						  } catch(Exception $ex) {
@@ -287,7 +287,7 @@ if (isset($hash) && $hash!="") {
 						   }
 						  echo "</p>";
 						} else {
-							$history=$emercoin->name_history($item['name']);
+							$history=$neko->name_history($item['name']);
 							if ($brand_info['address']==$history[0]['address']) {
 								 echo "<b>Verification: <font color='green'>PASSED</font></b><br><small class='text-muted'>(address verified)</small>";
 							} else {

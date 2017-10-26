@@ -171,7 +171,7 @@ function PrintTok($tokens) {
 		$brand_param = htmlspecialchars($brand);
 		try {
 			error_reporting(0);
-			$brand_info=$emercoin->name_show('dpo:'.$brand);
+			$brand_info=$neko->name_show('dpo:'.$brand);
 			echo "<p><b>Brand info: $brand_param</b><br/>";
 			$brandtok=Tokenize($brand_info);
 			PrintTok($brandtok);
@@ -184,20 +184,20 @@ function PrintTok($tokens) {
 		echo "<p><b>Serial: $sn</b></p>";
 		$filt_key = 'dpo:'.$brand.':'.$sn.':';
 		echo $filt_key."<br>";
-		$filt_list = $emercoin->name_filter($filt_key);
+		$filt_list = $neko->name_filter($filt_key);
 		if(empty($filt_list)) {
 		echo "Serial $sn not found in the Emercoin blockchain<br>";
 		echo "<b>Verification: <font color='red'>FAILED</font></b>";
 		} else
 		foreach($filt_list as $item) { // Yterate item list
-		  $item =  $emercoin->name_show($item['name']); // fetch full item record
+		  $item =  $neko->name_show($item['name']); // fetch full item record
 		  $tokens = Tokenize($item);
 		  echo "<p>Item: " . $item['name'] . "<br/>";
 		  PrintTok($tokens);
 		  $tokensCopy=array_change_key_case($tokens, CASE_LOWER);
 			if (isset($tokensCopy['signature'])) {
 			  try {
-				$ver = $emercoin->verifymessage($brand_info['address'], $tokensCopy['signature'], $tokens['__FOR_SIG__'])?
+				$ver = $neko->verifymessage($brand_info['address'], $tokensCopy['signature'], $tokens['__FOR_SIG__'])?
 				  "<font color='green'>PASSED</font><br><small class='text-muted'>(signature verified)</small>" : "<font color='red'>FAILED</font>";
 				echo "<b>Verification: $ver</b>";
 			  } catch(Exception $ex) {
@@ -207,7 +207,7 @@ function PrintTok($tokens) {
 			   }
 			  echo "</p>";
 			} else {
-				$history=$emercoin->name_history($item['name']);
+				$history=$neko->name_history($item['name']);
 				if ($brand_info['address']==$history[0]['address']) {
 					 echo "<b>Verification: <font color='green'>PASSED</font></b><br><small class='text-muted'>(address verified)</small>";
 				} else {

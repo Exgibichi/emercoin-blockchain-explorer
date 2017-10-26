@@ -33,7 +33,7 @@ if (!empty($_COOKIE["lang"])) {
 	</thead>
 	<tbody>';
 	$barcount=0;
-	$blockinfo=$emercoin->getinfo();
+	$blockinfo=$neko->getinfo();
 	$blockheight=bcsub($blockinfo['blocks'],999,0);
 	$showBlocksQuery = "SELECT COUNT(*) as count, version FROM blocks
 						WHERE height >= '".$blockheight."'

@@ -874,7 +874,7 @@ if ($type=="address" && $subtype=="isvalid" && $pattern!="" && $details=="reduce
 {
 	if ($subtype=="isvalid") {
 		$valid_access=1;
-		$array=$emercoin->validateaddress($pattern);
+		$array=$neko->validateaddress($pattern);
 		echo $array["isvalid"];
 	}
 	
@@ -884,7 +884,7 @@ if ($type=="address" && $subtype=="ismine" && $pattern!="" && $details=="reduce"
 {
 	if ($subtype=="ismine") {
 		$valid_access=1;
-		$array=$emercoin->validateaddress($pattern);
+		$array=$neko->validateaddress($pattern);
 		echo $array["ismine"];
 	}
 	
