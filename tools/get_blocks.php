@@ -849,7 +849,7 @@ function gettxoutput($dbconn, $neko, $txid, $txdbid, $blockid, $time, $receivead
 
 
 // genesis block
-$hash="00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d";
+$hash="000027036a0c08bcc5705a8025481ddd6905fd6bd03567019f1844034b09b0c7";
 $query="SELECT hash FROM blocks ORDER BY id DESC LIMIT 32";
 $result = $dbconn->query($query);
 $dbconn->error;

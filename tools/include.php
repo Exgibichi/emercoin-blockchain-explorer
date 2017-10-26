@@ -1,12 +1,12 @@
 <?php
 error_reporting(E_ALL);
-$dbconn = new mysqli("localhost", "emcchain","ilikeemcchain", "emcchain");
+$dbconn = new mysqli("localhost", "emcchain","ilikeemcchain", "neko");
 // Check connection
 if ($dbconn->connect_error) {
     die("Connection failed: " . $dbconn->connect_error);
 }
 
-$dbconn2 = new mysqli("localhost", "emcchain","ilikeemcchain", "emcchain");
+$dbconn2 = new mysqli("localhost", "emcchain","ilikeemcchain", "neko");
 // Check connection
 if ($dbconn2->connect_error) {
     die("Connection failed: " . $dbconn2->connect_error);
