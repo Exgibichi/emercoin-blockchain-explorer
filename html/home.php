@@ -10,9 +10,6 @@
 			<div id="recent_transactions"class="panel panel-default">
 				<tr><td><i class="fa fa-spinner fa-3x fa-pulse"></i></td></tr>
 			</div>
-			<div id="version_share"class="panel panel-default">
-				<tr><td><i class="fa fa-spinner fa-3x fa-pulse"></i></td></tr>
-			</div>
 		</div>
 	</div>
 </div>
