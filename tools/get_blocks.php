@@ -14,7 +14,7 @@ function getblockinfo($dbconn, $neko, $hash) {
 	$version=$block['version'];
 	$merkleroot=$block['merkleroot'];
 	$time=$block['time'];
-	$time=strtotime($time);
+	//$time=strtotime($time);
 	$nonce=$block['nonce'];
 	$bits=$block['bits'];
 	$difficulty=$block['difficulty'];
