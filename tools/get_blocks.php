@@ -701,12 +701,12 @@ function gettxinput($dbconn, $neko, $txid, $txdbid, $blockid, $sentaddress) {
 			//echo $blockid." ";
 			//echo $txdbid." ";
 			$coinbase="";
-			$vout="";
+			$vout=0;
 			$asm="";
 			$hex="";
 			$sequence="";
 			$address="";
-			$value="";
+			$value=0;
 			$vintxid="";
 			if (isset($vin["txid"])) {
 				//echo $vin["txid"]." ";
@@ -793,7 +793,7 @@ function gettxoutput($dbconn, $neko, $txid, $txdbid, $blockid, $time, $receivead
 			$n="";
 			$asm="";
 			$hex="";
-			$reqsigs="";
+			$reqsigs=0;
 			$type="";
 			$address="";
 			$value="";
