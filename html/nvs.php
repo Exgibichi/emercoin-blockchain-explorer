@@ -267,7 +267,7 @@ if ($type=="N/A"||$type=="n/a") {
 		} else {
 			$isvalid="success";
 		}
-		if (preg_match('#^http:#i', $value) === 1||preg_match('#^https:#i', $value) === 1||preg_match('#^ftp:#i', $value) === 1||preg_match('#^sftp:#i', $value) === 1||preg_match('#^ftps:#i', $value) === 1||preg_match('#^magnet:#i', $value) === 1||preg_match('#^mailto:#i', $value) === 1||preg_match('#^emercoin:E#i', $value) === 1||preg_match('#^bitcoin:1#i', $value) === 1) {
+		if (preg_match('#^http:#i', $value) === 1||preg_match('#^https:#i', $value) === 1||preg_match('#^ftp:#i', $value) === 1||preg_match('#^sftp:#i', $value) === 1||preg_match('#^ftps:#i', $value) === 1||preg_match('#^magnet:#i', $value) === 1||preg_match('#^mailto:#i', $value) === 1||preg_match('#^neko:E#i', $value) === 1||preg_match('#^bitcoin:1#i', $value) === 1) {
 			echo '<tr><td>'.$type.'</td><td>'.$name.'</td><td>'.$collapseLink.'</td><td>'.$valueshort.$valuelong.'</td><td><a target="_blank" href="'.$value.'"><i class="fa fa-external-link"></i></a></td><td><a href="/block/'.$registered_at.'" class="btn btn-primary btn-xs" role="button">'.$registered_at.'</a></td><td class="text-'.$isvalid.'">'.$expires_at.'</td></tr>';
 		} else {
 			echo '<tr><td>'.$type.'</td><td>'.$name.'</td><td>'.$collapseLink.'</td><td>'.$valueshort.$valuelong.'</td><td></td><td><a href="/block/'.$registered_at.'" class="btn btn-primary btn-xs" role="button">'.$registered_at.'</a></td><td class="text-'.$isvalid.'">'.$expires_at.'</td></tr>';

@@ -34,7 +34,7 @@ if (!empty($_COOKIE["lang"])) {
 	<script src="/js/notify-custom.js" type="text/javascript"></script>
 	<script src="/js/highstock.js" type="text/javascript"></script>
 	<script src="/js/exporting.js" type="text/javascript"></script>
-	<title>Emercoin Blockchain</title>
+	<title>Neko Blockchain</title>
 </head>
 
 <body>
@@ -49,7 +49,7 @@ if (!empty($_COOKIE["lang"])) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-		<a class="navbar-brand" style="padding:11px" href="/"><img src="/img/emercoin_header.png" height="28" ></a>
+		<a class="navbar-brand" style="padding:11px" href="/"><img src="/img/neko_header.png" height="28" ></a>
     </div>
 
 	<ul class="nav navbar-nav navbar-right">
@@ -110,18 +110,18 @@ if (!empty($_COOKIE["lang"])) {
 			<?php echo lang('DO_SERVICE'); ?>
 		</button>
 		<br>
-		<sub><a href="https://hashflare.io/r/AD872628" target="_blank">Cloud Mining</a> | <a href="https://livecoin.net?from=Livecoin-20e00c47" target="_blank">Emercoin Exchange</a></sub>
+		<sub><a href="https://hashflare.io/r/AD872628" target="_blank">Cloud Mining</a> | <a href="https://livecoin.net?from=Livecoin-20e00c47" target="_blank">Neko Exchange</a></sub>
 		<font size="1%"><a href="emclnx/robotrap.php">&#21;</a></font>
 		<div class="collapse" id="collapseDonations">
 		<p class="text-muted"><sub>
 		<b><?php echo lang('DONATION_DONATION'); ?></b><br>
-			[NK] <a href="emercoin:EZRcD6ZfGJLaYSkKwZYRkrhVGxk1mimG93?amount=0&label=Donation - emercoin.mintr.org">EZRcD6ZfGJLaYSkKwZYRkrhVGxk1mimG93</a><br>
-			[PPC] <a href="peercoin:PTDnVfgcDVk417rLXrokC3nLj44tFZ3Hyw?amount=0&label=Donation - emercoin.mintr.org">PTDnVfgcDVk417rLXrokC3nLj44tFZ3Hyw</a><br>
-			[BTC] <a href="bitcoin:1N1G4Ac8vkvMpMKDksrxuHpkRiC86KsBvX ?amount=0&label=Donation - emercoin.mintr.org">1N1G4Ac8vkvMpMKDksrxuHpkRiC86KsBvX </a><br>
+			[NK] <a href="neko:EZRcD6ZfGJLaYSkKwZYRkrhVGxk1mimG93?amount=0&label=Donation - neko.mintr.org">EZRcD6ZfGJLaYSkKwZYRkrhVGxk1mimG93</a><br>
+			[PPC] <a href="peercoin:PTDnVfgcDVk417rLXrokC3nLj44tFZ3Hyw?amount=0&label=Donation - neko.mintr.org">PTDnVfgcDVk417rLXrokC3nLj44tFZ3Hyw</a><br>
+			[BTC] <a href="bitcoin:1N1G4Ac8vkvMpMKDksrxuHpkRiC86KsBvX ?amount=0&label=Donation - neko.mintr.org">1N1G4Ac8vkvMpMKDksrxuHpkRiC86KsBvX </a><br>
 
 		<b><?php echo lang('REFERRAL_REFERRAL'); ?></b><br>
 			Start mining Bitcoins from $2.40 per 10GH/s here: <a href="https://hashflare.io/r/AD872628" target="_blank">Hashflare.io</a><br>
-			Sell your Bitcoins for Emercoins here: <a href="https://livecoin.net?from=Livecoin-20e00c47" target="_blank">Livecoin.net</a><br>
+			Sell your Bitcoins for Nekos here: <a href="https://livecoin.net?from=Livecoin-20e00c47" target="_blank">Livecoin.net</a><br>
 		</sub></p>
 		</div>
 		<p class="text-muted">

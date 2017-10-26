@@ -117,7 +117,7 @@ if ($include_file=="api") {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-		<a class="navbar-brand" style="padding:11px" href="/"><img src="/img/emercoin_header.png" height="28" ></a>
+		<a class="navbar-brand" style="padding:11px" href="/"><img src="/img/neko_header.png" height="28" ></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

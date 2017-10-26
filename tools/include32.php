@@ -7,5 +7,5 @@ if ($dbconn->connect_error) {
 }
 
 require_once '/var/www/neko-blockchain-explorer/tools/include/jsonRPCClient.php';
-$neko = new jsonRPCClient('http://emercoinrpc:DRBKt7KStSXLYKjVCKUwTRJe7hhsppQiHgKMs2pWYADL@127.0.0.1:6662/');
+$neko = new jsonRPCClient('http://nekorpc:DRBKt7KStSXLYKjVCKUwTRJe7hhsppQiHgKMs2pWYADL@127.0.0.1:6662/');
 ?>
