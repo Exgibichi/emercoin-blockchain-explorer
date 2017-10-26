@@ -28,14 +28,14 @@ while($row = $result->fetch_assoc())
 	} else {
 		$accounts[$txid].=",".$address;
 	}
-}	
+}
 
 $accountaddresses=array();
 foreach($accounts as $key => $value) {
     if (strpos($value, $uriaddress) !== false) {
 		foreach (explode(",",$value) as $val) {
 			array_push($accountaddresses,$val);
-		}	
+		}
     }
 }
 $accountaddresses=array_unique($accountaddresses);
@@ -45,9 +45,9 @@ foreach ($accountaddresses as $address) {
 		if (strpos($value, $address) !== false) {
 			foreach (explode(",",$value) as $val) {
 				array_push($accountaddresses2,$val);
-			}	
+			}
 		}
-	}	
+	}
 }
 $accountaddresses2=array_unique($accountaddresses2);
 
@@ -99,21 +99,21 @@ $query = "SELECT total_coins FROM blocks ORDER BY height DESC LIMIT 1";
 		$block_total_coins=$row['total_coins'];
 	}
 
-$balance=0;	
+$balance=0;
 $addressbalances=array();
 foreach	($accountaddresses2 as $address) {
-	
+
 	$addressbalances[$address]=$addresses[$address];
 	$balance+=$addresses[$address];
-}	
+}
 arsort($addressbalances);
 
 echo'
 <h4><strong>Estimated Account Value</strong></h4>
 <table class="table">
-	<tr><td><h3>Balance</h3></td><td width="75%"><h3><span class="label label-success">'.TrimTrailingZeroes(number_format($balance,8)).' EMC</span></h3></td></tr>';
+	<tr><td><h3>Balance</h3></td><td width="75%"><h3><span class="label label-success">'.TrimTrailingZeroes(number_format($balance,8)).' NK</span></h3></td></tr>';
 foreach ($addressbalances as $key => $value) {
-	if ($value>0) {echo '<tr><td>'.$key.'</td><td>'.$value." EMC</td></tr>";}
+	if ($value>0) {echo '<tr><td>'.$key.'</td><td>'.$value." NK</td></tr>";}
 }
 echo '</table>';
 echo '<button class="btn btn-xs btn-primary" type="button" data-toggle="collapse" data-target="#unusedAddresses" aria-expanded="false" aria-controls="unusedAddresses">

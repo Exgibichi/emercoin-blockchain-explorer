@@ -40,7 +40,7 @@ function get_coinsupply() {
             },
 
             series : [{
-                name : 'EMC',
+                name : 'NK',
 				color: '#8d2d9e',
                 data : data,
                 tooltip: {

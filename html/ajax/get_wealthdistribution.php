@@ -105,7 +105,7 @@ $(function () {
 			<div class="col-md-5">
 			<table class="table table-striped">
 				<tr>
-					<th><?php echo lang('TOP_ADDRESSES'); ?></th><th><?php echo lang('HOLDINGS_EMC'); ?></th><th><?php echo lang('PERCENTAGE_PERCENTAGE'); ?></th>
+					<th><?php echo lang('TOP_ADDRESSES'); ?></th><th><?php echo lang('HOLDINGS_NK'); ?></th><th><?php echo lang('PERCENTAGE_PERCENTAGE'); ?></th>
 				</tr>
 				<tr>
 					<td>Top 10</td><td><?php echo TrimTrailingZeroes(number_format(round($top10,7),8)); ?></td><td><?php echo round(($top10*100/$block_total_coins),2); ?></td>

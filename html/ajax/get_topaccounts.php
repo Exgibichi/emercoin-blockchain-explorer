@@ -13,7 +13,7 @@
 	<h3><?php echo lang('TOP_100ACCOUNTS'); ?></h3>
 	<table id="address_table" class="table table-striped">
 	<thead>
-	<tr><th><?php echo lang('RANK_RANK'); ?></th><th><?php echo lang('ADDRESS_ADDRESS'); ?></th><th><?php echo lang('BALANCE_EMC'); ?></th><th><?php echo lang('PERCENTAGE_COINS'); ?></th><th><?php echo lang('LAST_RECEIVE'); ?></th><th><?php echo lang('LAST_SENT'); ?></th></tr>
+	<tr><th><?php echo lang('RANK_RANK'); ?></th><th><?php echo lang('ADDRESS_ADDRESS'); ?></th><th><?php echo lang('BALANCE_NK'); ?></th><th><?php echo lang('PERCENTAGE_COINS'); ?></th><th><?php echo lang('LAST_RECEIVE'); ?></th><th><?php echo lang('LAST_SENT'); ?></th></tr>
 	</thead>
 	<tbody>
 	<?php

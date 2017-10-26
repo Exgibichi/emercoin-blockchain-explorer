@@ -42,23 +42,11 @@ if (isset($_SERVER['REQUEST_URI'])) {
 	if ($URI[1]=="top") {
 		$include_file="top";
 	}
-	if ($URI[1]=="nvs") {
-		$include_file="nvs";
-	}
-	if ($URI[1]=="emerboard") {
-		$include_file="emerboard";
-	}
-	if ($URI[1]=="dpo") {
-		$include_file="dpo";
-	}
 	if ($URI[1]=="cointrace") {
 		$include_file="cointrace";
 	}
 	if ($URI[1]=="tos") {
 		$include_file="tos";
-	}
-	if ($URI[1]=="poscal") {
-		$include_file="poscal";
 	}
 	$searchinput="";
 	if ($URI[1]=="search") {
@@ -114,7 +102,7 @@ if ($include_file=="api") {
 			cursor:pointer;
 		}
 	</style>
-	<title>Emercoin Blockchain</title>
+	<title>Neko Blockchain</title>
 </head>
 
 <body>
@@ -139,10 +127,6 @@ if ($include_file=="api") {
 				<li <?php if ($include_file=='stats') { echo 'class="active"'; } ?>><a href="/stats"><?php echo lang('STATS_STATS'); ?></a></li>
 				<li <?php if ($include_file=='chart') { echo 'class="active"'; } ?>><a href="/chart"><?php echo lang('CHARTS_CHARTS'); ?></a></li>
 				<li <?php if ($include_file=='top') { echo 'class="active"'; } ?>><a href="/top"><?php echo lang('TOP_TOP'); ?></a></li>
-				<li <?php if ($include_file=='nvs') { echo 'class="active"'; } ?>><a href="/nvs"><?php echo lang('NVS_NVS'); ?></a></li>
-				<li <?php if ($include_file=='dpo') { echo 'class="active"'; } ?>><a href="/dpo"><?php echo 'DPO'; ?></a></li>
-				<li <?php if ($include_file=='poscal') { echo 'class="active"'; } ?>><a href="/poscal"><?php echo 'Mining-Calculator'; ?></a></li>
-				<li <?php if ($include_file=='emerboard') { echo 'class="active"'; } ?>><a href="/emerboard"><?php echo lang('EMERBOARD_EMERBOARD'); ?></a></li>
 			</ul>
 		<form class="navbar-form navbar-left" role="search" action="javascript:search();">
 			<div class="form-group ">
@@ -150,43 +134,6 @@ if ($include_file=="api") {
 			</div>
 			<button type="submit" class="btn btn-default"><?php echo lang('SHOW_SHOW'); ?></button>
 		</form>
-		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-				<span class="label label-primary">Mainnet</span>
-				<span class="caret"></span></a>
-							  <ul class="dropdown-menu">
-							    <li><a href="https://emercoin.mintr.org"> Mainnet</a></li>
-							    <li><a href="https://testnet.emercoin.mintr.org"> Testnet</a></li>
-					</ul>
-			</li>
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-			<?php
-			switch ($lang){
-				case "cn":
-					echo '<img src="/lang/cn.png"> CN ';
-					break;
-				case "de":
-					echo '<img src="/lang/de.png"> DE ';
-					break;
-				case "en":
-					echo '<img src="/lang/en.png"> EN ';
-					break;
-				default:
-					echo '<img src="/lang/en.png"> EN ';
-					break;
-			}
-			?>
-			<span class="caret"></span></a>
-						  <ul class="dropdown-menu">
-						    <li><a href="javascript:setLanguage('cn');"><img src="/lang/cn.png"> CN</a></li>
-						    <li><a href="javascript:setLanguage('de');"><img src="/lang/de.png"> DE</a></li>
-							<li><a href="javascript:setLanguage('en');"><img src="/lang/en.png"> EN</a></li>
-						  </ul>
-						</li>
-
-      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -223,32 +170,6 @@ if ($include_file=="api") {
 	<?php
 		include ($include_file.".php");
 	?>
-	<!-- Ende include-->
-<footer class="footer">
-      <div class="container" >
-		<button class="btn btn-xs btn-primary" type="button" data-toggle="collapse" data-target="#collapseDonations" aria-expanded="false" aria-controls="collapseDonations">
-			<?php echo lang('DO_SERVICE'); ?>
-		</button>
-		<br>
-		<sub><a href="https://emercoin.mintr.org/api/help">API</a> | <a href="https://hashflare.io/r/AD872628" target="_blank">Cloud Mining</a> | <a href="https://livecoin.net?from=Livecoin-20e00c47" target="_blank">Emercoin Exchange</a></sub>
-		<font size="1%"><a href="emclnx/robotrap.php">&#21;</a></font>
-		<div class="collapse" id="collapseDonations">
-		<p class="text-muted"><sub>
-		<b><?php echo lang('DONATION_DONATION'); ?></b><br>
-			[EMC] <a href="emercoin:EZRcD6ZfGJLaYSkKwZYRkrhVGxk1mimG93?amount=0&label=Donation - emercoin.mintr.org">EZRcD6ZfGJLaYSkKwZYRkrhVGxk1mimG93</a><br>
-			[PPC] <a href="peercoin:PTDnVfgcDVk417rLXrokC3nLj44tFZ3Hyw?amount=0&label=Donation - emercoin.mintr.org">PTDnVfgcDVk417rLXrokC3nLj44tFZ3Hyw</a><br>
-			[BTC] <a href="bitcoin:1N1G4Ac8vkvMpMKDksrxuHpkRiC86KsBvX ?amount=0&label=Donation - emercoin.mintr.org">1N1G4Ac8vkvMpMKDksrxuHpkRiC86KsBvX </a><br>
-
-		<b><?php echo lang('REFERRAL_REFERRAL'); ?></b><br>
-			Start mining Bitcoins from $2.40 per 10GH/s here: <a href="https://hashflare.io/r/AD872628" target="_blank">Hashflare.io</a><br>
-			Sell your Bitcoins for Emercoins here: <a href="https://livecoin.net?from=Livecoin-20e00c47" target="_blank">Livecoin.net</a><br>
-		</sub></p>
-		</div>
-		<p class="text-muted">
-		<sub><?php echo lang('INFO_FEEDBACK'); ?>: <a href="https://bitcointalk.org/index.php?topic=958008.0" target="_blank">Bitcointalk</a> | <a href="https://github.com/Valermos/neko-blockchain-explorer" target="_blank">GitHub</a> | <a href="mailto:admin@mintr.org">E-Mail</a></sub><br>
-		<sub>v.1.8.1</sub></p>
-      </div>
-</footer>
 </body>
 
 </html>

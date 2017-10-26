@@ -146,13 +146,13 @@ You will deposit your coins on your own risk!</span>
 To keep this service up and running it is necessary to demand some fees.
 <ul>
 	<li>Deposit: free</li>
-	<li>Withdraw (external): 0.05 EMC</li>
-	<li>Withdraw (internal): 0.005 EMC</li>
+	<li>Withdraw (external): 0.05 NK</li>
+	<li>Withdraw (internal): 0.005 NK</li>
 	<li>Up to five addresses: free</li>
-	<li>Every additional address: 1 EMC</li>
+	<li>Every additional address: 1 NK</li>
 	<li>Register new name in NVS: dynamic fee</li>
 	<li>Update name in NVS: dynamic fee</li>
-	<li>Delete name in NVS: 0.05 EMC</li>
+	<li>Delete name in NVS: 0.05 NK</li>
 	<li>Fee split: 50% (this means that 50% of all fees are for the service and the other 50% are going into the stake pool)</li>
 	<li>Proof-of-Stake fee: 7.5%</li>
 	
