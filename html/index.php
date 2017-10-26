@@ -124,8 +124,6 @@ if ($include_file=="api") {
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 				<li <?php if ($include_file=='chain') { echo 'class="active"'; } ?>><a href="/chain"><?php echo lang('CHAIN_CHAIN'); ?></a></li>
-				<li <?php if ($include_file=='stats') { echo 'class="active"'; } ?>><a href="/stats"><?php echo lang('STATS_STATS'); ?></a></li>
-				<li <?php if ($include_file=='chart') { echo 'class="active"'; } ?>><a href="/chart"><?php echo lang('CHARTS_CHARTS'); ?></a></li>
 				<li <?php if ($include_file=='top') { echo 'class="active"'; } ?>><a href="/top"><?php echo lang('TOP_TOP'); ?></a></li>
 			</ul>
 		<form class="navbar-form navbar-left" role="search" action="javascript:search();">
